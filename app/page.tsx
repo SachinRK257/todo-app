@@ -1,3 +1,66 @@
+/*
+  =============================================
+  TYPE 1 — INLINE COMMENTS
+  =============================================
+  what it is:
+  small notes written inside the code explaining
+  what each line does using //
+
+  advantages:
+  1. anyone reading code understands it instantly
+  2. saves time when you come back after weeks
+  3. makes debugging faster
+  4. helps teammates understand your code quickly
+*/
+
+/*
+  =============================================
+  TYPE 2 — JSDOC (FUNCTION DOCUMENTATION)
+  =============================================
+  what it is:
+  special comments written above a function using
+  /** to explain what it does, what it takes and
+  what it returns
+
+  advantages:
+  1. vscode shows description automatically when you type function name
+  2. anyone can understand the function without reading full code
+  3. professional standard used in real companies
+  4. helps catch mistakes — clearly shows what data to pass
+*/
+
+/*
+  =============================================
+  TYPE 3 — README DOCUMENTATION
+  =============================================
+  what it is:
+  a file (README.md) that explains the whole project —
+  what it is, how to run it and what technologies used.
+  first thing people see on github
+
+  advantages:
+  1. makes your github look professional
+  2. anyone can run your project just by following the steps
+  3. no need to explain your project verbally — readme does it
+  4. every real company project has a readme
+*/
+
+/*
+  =============================================
+  TYPE 4 — API DOCUMENTATION
+  =============================================
+  what it is:
+  explains your backend routes — what url to call,
+  which method to use (GET POST PUT DELETE) and
+  what data to send and receive back
+
+  advantages:
+  1. frontend and backend developers can work separately
+  2. easy to test each route one by one using postman
+  3. no confusion about what data to send or expect back
+  4. all real apps like swiggy and github have api documentation
+*/
+
 "use client";
 
 // importing react hooks for state and lifecycle
