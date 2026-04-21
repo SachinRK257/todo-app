@@ -19,11 +19,15 @@ export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   // gets all todos from backend and shows on screen
-  const getTodos = async () => {
-    const res = await fetch("/api/todos"); // calling backend api
-    const data = await res.json(); // converting reply to js object
-    setTodos(data); // updating the screen
-  };
+ const getTodos = async () => {
+  try {
+    const res = await fetch("/api/todos");
+    const data = await res.json();
+    setTodos(data);
+  } catch (error) {
+    console.error("something went wrong", error); // shows error in console
+  }
+};
 
   // runs once automatically when page loads
   useEffect(() => {
@@ -81,43 +85,46 @@ export default function Home() {
 
       {/* input box and add button */}
       <div className="flex gap-2 mb-6">
-        <input
-          className="border p-2 rounded w-64 text-black"
-          value={text} // shows current typed value
-          onChange={(e) => setText(e.target.value)} // updates on every keystroke
-          placeholder="Enter todo..."
-        />
+      <input className="border p-2 rounded w-64 text-black"value={text}
+      onChange={(e) => setText(e.target.value)}
+      onKeyDown={(e) => e.key === "Enter" && addTodo()} // press enter to add
+       placeholder="Enter todo..."/>
+
         <button
           onClick={addTodo} // calls addTodo when clicked
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Add
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Add
         </button>
+        
+       
       </div>
 
       {/* list of all todos */}
       <ul className="w-full max-w-md">
-        {todos.map((todo) => ( // loop through each todo
+
+        {/* todo list section */}
+  {todos.length === 0 ? (
+    <p className="text-center text-gray-400 mt-4">no todos yet. add one above!</p>
+         ) : null}
+       {todos.map((todo) => ( // loop through each todo
           <li
             key={todo.id} // unique key for each item
-            className="flex justify-between items-center bg-white p-3 mb-2 rounded shadow"
-          >
+            className="flex justify-between items-center bg-white p-3 mb-2 rounded shadow">
+          
             <span className="text-black">{todo.text}</span>
 
             <div className="flex gap-2">
               <button
                 onClick={() => updateTodo(todo.id)} // update this todo
-                className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500"
-              >
-                Update
-              </button>
+                className="bg-yellow-400 px-3 py-1 rounded hover:bg-yellow-500">Update</button>
+              
+                
 
               <button
                 onClick={() => deleteTodo(todo.id)} // delete this todo
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-              >
-                Delete
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete
               </button>
+              
+                
             </div>
           </li>
         ))}
