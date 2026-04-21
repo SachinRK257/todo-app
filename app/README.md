@@ -45,3 +45,34 @@ a simple todo list app built with react, tailwind and next.js
 ## note
 data is temporary and clears when server restarts.
 real database will be added in next phase.
+
+
+## 4 types of documentation and advantages
+
+### 1. inline comments
+notes written inside the code using //
+- anyone reading code understands it instantly
+- saves time when you come back after weeks
+- makes debugging faster
+- helps teammates understand your code quickly
+
+### 2. jsdoc
+structured comments written above functions using /** */
+- vscode shows hints automatically when you type function name
+- anyone can understand function without reading full code
+- professional standard used in real companies
+- helps catch mistakes early
+
+### 3. readme
+a file that explains the whole project on github
+- makes your github look professional
+- anyone can run project just by following the steps
+- no need to explain project verbally
+- every real company project has a readme
+
+### 4. api documentation
+explains all backend routes — url, method, data
+- frontend and backend can work separately
+- easy to test each route using postman
+- no confusion about what data to send or expect back
+- all real apps like swiggy and github have api docs
