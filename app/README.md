@@ -78,7 +78,5 @@ advantages:
 ## note
 data is stored temporarily in memory.
 it clears when the server restarts.
-a real database will be added in the next phase.
 
-## developed by
-Sachin RK
+
