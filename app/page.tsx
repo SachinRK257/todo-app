@@ -91,413 +91,214 @@ export default function Home() {
   };
 
   return (
-    <>
-      <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    // main wrapper — dark background full screen
+    <div className="min-h-screen bg-gray-950 text-gray-100 px-5 py-12">
 
-        body {
-          font-family: 'DM Sans', sans-serif;
-          background: #0f0f13;
-          min-height: 100vh;
-          color: #e8e8f0;
-        }
+      {/* container — centered with max width */}
+      <div className="max-w-2xl mx-auto">
 
-        .app-wrapper {
-          min-height: 100vh;
-          background: #0f0f13;
-          background-image:
-            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99,102,241,0.15) 0%, transparent 70%),
-            radial-gradient(ellipse 40% 30% at 80% 80%, rgba(236,72,153,0.06) 0%, transparent 60%);
-          padding: 48px 20px 80px;
-        }
+        {/* ── HEADER ── */}
+        <div className="flex items-center justify-between mb-12">
 
-        .container { max-width: 680px; margin: 0 auto; }
+          {/* logo and title */}
+          <div className="flex items-center gap-3">
 
-        /* header */
-        .header {
-          margin-bottom: 48px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        .logo-area { display: flex; align-items: center; gap: 12px; }
-
-        .logo-icon {
-          width: 40px; height: 40px;
-          background: linear-gradient(135deg, #6366f1, #8b5cf6);
-          border-radius: 10px;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 20px; color: white; font-weight: 700;
-          box-shadow: 0 4px 20px rgba(99,102,241,0.4);
-        }
-
-        .app-title { font-size: 22px; font-weight: 700; color: #f0f0fa; letter-spacing: -0.3px; }
-        .app-subtitle { font-size: 12px; color: #6b6b8a; margin-top: 1px; }
-
-        .count-badge {
-          background: rgba(99,102,241,0.15);
-          border: 1px solid rgba(99,102,241,0.25);
-          color: #a5b4fc;
-          font-size: 12px; font-weight: 600;
-          padding: 6px 14px; border-radius: 20px;
-          font-family: 'DM Mono', monospace;
-        }
-
-        /* card */
-        .card {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.08);
-          border-radius: 20px; padding: 28px;
-          margin-bottom: 16px;
-        }
-
-        .card-label {
-          font-size: 11px; font-weight: 600;
-          color: #6366f1;
-          text-transform: uppercase; letter-spacing: 1.2px;
-          margin-bottom: 14px;
-        }
-
-        /* add input row */
-        .add-row { display: flex; gap: 10px; }
-
-        .main-input {
-          flex: 1;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 12px; padding: 14px 18px;
-          font-size: 14px; font-family: 'DM Sans', sans-serif;
-          color: #e8e8f0; outline: none; transition: all 0.2s;
-        }
-
-        .main-input::placeholder { color: #4a4a6a; }
-
-        .main-input:focus {
-          border-color: rgba(99,102,241,0.5);
-          background: rgba(255,255,255,0.08);
-          box-shadow: 0 0 0 3px rgba(99,102,241,0.1);
-        }
-
-        .btn-primary {
-          background: linear-gradient(135deg, #6366f1, #8b5cf6);
-          color: white; border: none; border-radius: 12px;
-          padding: 14px 24px; font-size: 14px; font-weight: 600;
-          font-family: 'DM Sans', sans-serif; cursor: pointer;
-          transition: all 0.2s; white-space: nowrap;
-          box-shadow: 0 4px 15px rgba(99,102,241,0.3);
-        }
-
-        .btn-primary:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(99,102,241,0.4);
-        }
-
-        /* search row */
-        .search-row { display: flex; gap: 10px; }
-
-        .id-input {
-          width: 140px;
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 12px; padding: 12px 16px;
-          font-size: 14px; font-family: 'DM Mono', monospace;
-          color: #e8e8f0; outline: none; transition: all 0.2s;
-        }
-
-        .id-input::placeholder { color: #4a4a6a; }
-
-        .id-input:focus {
-          border-color: rgba(16,185,129,0.5);
-          box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
-        }
-
-        .btn-search {
-          background: rgba(16,185,129,0.15);
-          border: 1px solid rgba(16,185,129,0.3);
-          color: #34d399; border-radius: 12px;
-          padding: 12px 20px; font-size: 13px; font-weight: 600;
-          font-family: 'DM Sans', sans-serif; cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .btn-search:hover {
-          background: rgba(16,185,129,0.25);
-          transform: translateY(-1px);
-        }
-
-        .btn-clear {
-          background: rgba(255,255,255,0.06);
-          border: 1px solid rgba(255,255,255,0.1);
-          color: #9ca3af; border-radius: 12px;
-          padding: 12px 16px; font-size: 13px; font-weight: 500;
-          font-family: 'DM Sans', sans-serif; cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .btn-clear:hover { background: rgba(255,255,255,0.1); }
-
-        /* found todo card */
-        .found-card {
-          background: rgba(16,185,129,0.06);
-          border: 1px solid rgba(16,185,129,0.2);
-          border-radius: 16px; padding: 20px 24px;
-          margin-bottom: 16px;
-          display: flex; align-items: center;
-          justify-content: space-between; gap: 12px;
-        }
-
-        .found-label {
-          font-size: 10px; font-weight: 600; color: #34d399;
-          text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;
-        }
-
-        .found-text {
-          font-size: 15px; color: #e8e8f0;
-          display: flex; align-items: center; gap: 8px;
-        }
-
-        /* list */
-        .list-header {
-          display: flex; align-items: center;
-          margin-bottom: 12px; padding: 0 4px;
-        }
-
-        .list-title {
-          font-size: 12px; font-weight: 600; color: #6b6b8a;
-          text-transform: uppercase; letter-spacing: 1px;
-        }
-
-        /* todo item */
-        .todo-item {
-          background: rgba(255,255,255,0.04);
-          border: 1px solid rgba(255,255,255,0.07);
-          border-radius: 14px; padding: 16px 20px;
-          margin-bottom: 8px;
-          display: flex; align-items: center;
-          justify-content: space-between; gap: 12px;
-          transition: all 0.2s;
-          animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-          from { opacity: 0; transform: translateY(8px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .todo-item:hover {
-          background: rgba(255,255,255,0.07);
-          border-color: rgba(255,255,255,0.12);
-          transform: translateX(2px);
-        }
-
-        .todo-left {
-          display: flex; align-items: center;
-          gap: 14px; flex: 1; min-width: 0;
-        }
-
-        .todo-id {
-          font-family: 'DM Mono', monospace;
-          font-size: 11px; font-weight: 500; color: #6366f1;
-          background: rgba(99,102,241,0.12);
-          border: 1px solid rgba(99,102,241,0.2);
-          padding: 3px 9px; border-radius: 6px;
-          white-space: nowrap; flex-shrink: 0;
-        }
-
-        .todo-text {
-          font-size: 14px; color: #d0d0e8;
-          white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-
-        .todo-actions { display: flex; gap: 8px; flex-shrink: 0; }
-
-        .btn-edit {
-          background: rgba(245,158,11,0.12);
-          border: 1px solid rgba(245,158,11,0.25);
-          color: #fbbf24; border-radius: 8px;
-          padding: 7px 14px; font-size: 12px; font-weight: 600;
-          font-family: 'DM Sans', sans-serif; cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .btn-edit:hover {
-          background: rgba(245,158,11,0.22);
-          transform: translateY(-1px);
-        }
-
-        .btn-del {
-          background: rgba(239,68,68,0.1);
-          border: 1px solid rgba(239,68,68,0.25);
-          color: #f87171; border-radius: 8px;
-          padding: 7px 14px; font-size: 12px; font-weight: 600;
-          font-family: 'DM Sans', sans-serif; cursor: pointer;
-          transition: all 0.2s;
-        }
-
-        .btn-del:hover {
-          background: rgba(239,68,68,0.2);
-          transform: translateY(-1px);
-        }
-
-        /* empty state */
-        .empty-state {
-          text-align: center; padding: 48px 20px; color: #4a4a6a;
-        }
-
-        .empty-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.5; }
-        .empty-text { font-size: 14px; color: #5a5a7a; }
-
-        /* loading dots */
-        .loading-row {
-          display: flex; gap: 8px;
-          padding: 24px; justify-content: center;
-        }
-
-        .dot {
-          width: 7px; height: 7px;
-          background: #6366f1; border-radius: 50%;
-          animation: bounce 1.2s infinite ease-in-out;
-        }
-
-        .dot:nth-child(2) { animation-delay: 0.2s; }
-        .dot:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes bounce {
-          0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-          40% { transform: scale(1); opacity: 1; }
-        }
-      `}</style>
-
-      <div className="app-wrapper">
-        <div className="container">
-
-          {/* header */}
-          <div className="header">
-            <div className="logo-area">
-              <div className="logo-icon">✓</div>
-              <div>
-                <div className="app-title">TaskFlow</div>
-                <div className="app-subtitle">Manage your tasks efficiently</div>
-              </div>
+            {/* logo icon */}
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-indigo-500/30">
+              ✓
             </div>
-            <div className="count-badge">
-              {todos.length} task{todos.length !== 1 ? "s" : ""}
+
+            {/* app name */}
+            <div>
+              <p className="text-xl font-bold text-white tracking-tight">TaskFlow</p>
+              <p className="text-xs text-gray-500 mt-0.5">Manage your tasks efficiently</p>
             </div>
+
           </div>
 
-          {/* add task card */}
-          <div className="card">
-            <div className="card-label">New Task</div>
-            <div className="add-row">
-              <input
-                className="main-input"
-                value={text}
-                onChange={(e) => setText(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleAdd()}
-                placeholder="What needs to be done?"
-              />
-              <button className="btn-primary" onClick={handleAdd}>
-                + Add Task
-              </button>
-            </div>
+          {/* task count badge */}
+          <div className="bg-indigo-500/10 border border-indigo-500/25 text-indigo-300 text-xs font-semibold px-4 py-1.5 rounded-full">
+            {todos.length} task{todos.length !== 1 ? "s" : ""}
           </div>
-
-          {/* search by id card */}
-          <div className="card">
-            <div className="card-label">Search by ID</div>
-            <div className="search-row">
-              <input
-                className="id-input"
-                value={searchId}
-                onChange={(e) => setSearchId(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearchById()}
-                placeholder="Enter ID..."
-                type="number"
-              />
-              <button className="btn-search" onClick={handleSearchById}>
-                🔍 Search
-              </button>
-              {foundTodo && (
-                <button className="btn-clear" onClick={handleClearSearch}>
-                  Clear
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* found todo result */}
-          {foundTodo && (
-            <div className="found-card">
-              <div>
-                <div className="found-label">✓ Result Found</div>
-                <div className="found-text">
-                  <span style={{ fontFamily: "'DM Mono',monospace", fontSize: "12px", color: "#34d399" }}>
-                    #{foundTodo.id}
-                  </span>
-                  {foundTodo.text}
-                </div>
-              </div>
-              <div className="todo-actions">
-                <button className="btn-edit" onClick={() => handleUpdate(foundTodo.id)}>
-                  Edit
-                </button>
-                <button className="btn-del" onClick={() => handleDelete(foundTodo.id)}>
-                  Delete
-                </button>
-              </div>
-            </div>
-          )}
-
-          {/* all tasks list */}
-          <div className="list-header">
-            <span className="list-title">All Tasks</span>
-          </div>
-
-          {/* loading animation */}
-          {loading ? (
-            <div className="loading-row">
-              <div className="dot"></div>
-              <div className="dot"></div>
-              <div className="dot"></div>
-            </div>
-          ) : todos.length === 0 ? (
-
-            /* empty state message */
-            <div className="empty-state">
-              <div className="empty-icon">📋</div>
-              <div className="empty-text">no tasks yet — add one above!</div>
-            </div>
-
-          ) : (
-
-            /* loop through all todos */
-            todos.map((todo) => (
-              <div
-                key={todo.id} // unique key for each todo
-                className="todo-item"
-                style={{ opacity: deletingId === todo.id ? 0.4 : 1 }} // fade when deleting
-              >
-                <div className="todo-left">
-                  <span className="todo-id">#{todo.id}</span> {/* id badge */}
-                  <span className="todo-text">{todo.text}</span> {/* todo text */}
-                </div>
-                <div className="todo-actions">
-                  <button className="btn-edit" onClick={() => handleUpdate(todo.id)}>
-                    Edit
-                  </button>
-                  <button className="btn-del" onClick={() => handleDelete(todo.id)}>
-                    Delete
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
 
         </div>
+
+        {/* ── ADD TASK CARD ── */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-7 mb-4">
+
+          {/* card label */}
+          <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-3">
+            New Task
+          </p>
+
+          {/* input and button row */}
+          <div className="flex gap-3">
+
+            {/* text input */}
+            <input
+              className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 outline-none focus:border-indigo-500/50 focus:ring-2 focus:ring-indigo-500/10 transition-all"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleAdd()} // press enter to add
+              placeholder="What needs to be done?"
+            />
+
+            {/* add button */}
+            <button
+              onClick={handleAdd}
+              className="bg-gradient-to-r from-indigo-500 to-violet-600 text-white font-semibold text-sm px-6 py-3 rounded-xl hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/30 transition-all whitespace-nowrap"
+            >
+              + Add Task
+            </button>
+
+          </div>
+        </div>
+
+        {/* ── SEARCH BY ID CARD ── */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-7 mb-4">
+
+          {/* card label */}
+          <p className="text-xs font-semibold text-indigo-400 uppercase tracking-widest mb-3">
+            Search by ID
+          </p>
+
+          {/* search row */}
+          <div className="flex gap-3">
+
+            {/* id input */}
+            <input
+              className="w-36 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 outline-none focus:border-emerald-500/50 focus:ring-2 focus:ring-emerald-500/10 transition-all font-mono"
+              value={searchId}
+              onChange={(e) => setSearchId(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSearchById()} // press enter to search
+              placeholder="Enter ID..."
+              type="number"
+            />
+
+            {/* search button */}
+            <button
+              onClick={handleSearchById}
+              className="bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-semibold text-sm px-5 py-3 rounded-xl hover:bg-emerald-500/25 hover:-translate-y-0.5 transition-all"
+            >
+              🔍 Search
+            </button>
+
+            {/* clear button — only shows when result found */}
+            {foundTodo && (
+              <button
+                onClick={handleClearSearch}
+                className="bg-white/5 border border-white/10 text-gray-400 font-medium text-sm px-4 py-3 rounded-xl hover:bg-white/10 transition-all"
+              >
+                Clear
+              </button>
+            )}
+
+          </div>
+        </div>
+
+        {/* ── FOUND TODO RESULT ── */}
+        {foundTodo && (
+          <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl px-6 py-5 mb-4 flex items-center justify-between gap-3">
+
+            {/* found info */}
+            <div>
+              <p className="text-xs font-semibold text-emerald-400 uppercase tracking-wider mb-1">
+                ✓ Result Found
+              </p>
+              <div className="flex items-center gap-2 text-gray-100 text-sm">
+                <span className="font-mono text-xs text-emerald-400">#{foundTodo.id}</span>
+                {foundTodo.text}
+              </div>
+            </div>
+
+            {/* action buttons */}
+            <div className="flex gap-2 shrink-0">
+              <button
+                onClick={() => handleUpdate(foundTodo.id)}
+                className="bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold px-4 py-2 rounded-lg hover:bg-amber-500/20 hover:-translate-y-0.5 transition-all"
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(foundTodo.id)}
+                className="bg-red-500/10 border border-red-500/25 text-red-400 text-xs font-semibold px-4 py-2 rounded-lg hover:bg-red-500/20 hover:-translate-y-0.5 transition-all"
+              >
+                Delete
+              </button>
+            </div>
+
+          </div>
+        )}
+
+        {/* ── ALL TASKS LIST ── */}
+        <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 px-1">
+          All Tasks
+        </p>
+
+        {/* loading dots */}
+        {loading ? (
+          <div className="flex gap-2 justify-center py-10">
+            <div className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: "0ms" }}></div>
+            <div className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: "150ms" }}></div>
+            <div className="w-2 h-2 bg-indigo-500 rounded-full animate-bounce" style={{ animationDelay: "300ms" }}></div>
+          </div>
+
+        ) : todos.length === 0 ? (
+
+          // empty state
+          <div className="text-center py-16">
+            <p className="text-4xl mb-3 opacity-40">📋</p>
+            <p className="text-sm text-gray-500">no tasks yet — add one above!</p>
+          </div>
+
+        ) : (
+
+          // todo list
+          todos.map((todo) => (
+            <div
+              key={todo.id} // unique key for each item
+              className="bg-white/[0.04] border border-white/[0.07] rounded-2xl px-5 py-4 mb-2 flex items-center justify-between gap-3 hover:bg-white/[0.07] hover:border-white/[0.12] hover:translate-x-0.5 transition-all"
+              style={{ opacity: deletingId === todo.id ? 0.4 : 1 }} // fade when deleting
+            >
+              {/* left side — id and text */}
+              <div className="flex items-center gap-3 flex-1 min-w-0">
+
+                {/* id badge */}
+                <span className="font-mono text-xs font-medium text-indigo-400 bg-indigo-500/10 border border-indigo-500/20 px-2.5 py-1 rounded-md shrink-0">
+                  #{todo.id}
+                </span>
+
+                {/* todo text */}
+                <span className="text-sm text-gray-300 truncate">{todo.text}</span>
+
+              </div>
+
+              {/* right side — buttons */}
+              <div className="flex gap-2 shrink-0">
+
+                {/* edit button */}
+                <button
+                  onClick={() => handleUpdate(todo.id)}
+                  className="bg-amber-500/10 border border-amber-500/25 text-amber-400 text-xs font-semibold px-3.5 py-1.5 rounded-lg hover:bg-amber-500/20 hover:-translate-y-0.5 transition-all"
+                >
+                  Edit
+                </button>
+
+                {/* delete button */}
+                <button
+                  onClick={() => handleDelete(todo.id)}
+                  className="bg-red-500/10 border border-red-500/25 text-red-400 text-xs font-semibold px-3.5 py-1.5 rounded-lg hover:bg-red-500/20 hover:-translate-y-0.5 transition-all"
+                >
+                  Delete
+                </button>
+
+              </div>
+            </div>
+          ))
+        )}
+
       </div>
-    </>
+    </div>
   );
 }
