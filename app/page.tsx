@@ -103,14 +103,14 @@ export default function Home() {
           className="border p-3 rounded w-80"
           value={text} // bind input with state
           onChange={(e) => setText(e.target.value)} // update state on typing
-          placeholder="Enter todo..."
-        />
+          placeholder="Enter todo..."/>
+        
 
         {/* add button */}
         <button
           onClick={handleAdd} // call add function
-          className="bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600"
-        >
+          className="bg-blue-500 text-white px-5 py-2 rounded hover:bg-blue-600">
+        
           Add
         </button>
 
@@ -129,8 +129,8 @@ export default function Home() {
 
           <div
             key={todo.id} // unique id for each todo
-            className="flex justify-between items-center bg-white p-4 rounded shadow"
-          >
+            className="flex justify-between items-center bg-white p-4 rounded shadow">
+          
 
             {/* show todo text */}
             <span>{todo.text}</span>
@@ -142,8 +142,8 @@ export default function Home() {
               {/* update button */}
               <button
                 onClick={() => handleUpdate(todo.id)} // update this todo
-                className="bg-yellow-400 px-4 py-1 rounded hover:bg-yellow-500"
-              >
+                className="bg-yellow-400 px-4 py-1 rounded hover:bg-yellow-500">
+              
                 Update
               </button>
 
@@ -151,8 +151,8 @@ export default function Home() {
               {/* delete button */}
               <button
                 onClick={() => handleDelete(todo.id)} // delete this todo
-                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600"
-              >
+                className="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600">
+              
                 Delete
               </button>
 

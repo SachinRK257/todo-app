@@ -20,7 +20,7 @@ https://github.com/SachinRK257/todo-app
 - next js — backend api routes
 - typescript — type safety
 
-## 4 types of documentation used
+### types of documentation used
 
 ### 1. inline comments
 notes written inside the code using //
