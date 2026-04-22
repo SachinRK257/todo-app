@@ -46,19 +46,12 @@ advantages:
 - no need to explain project verbally
 - every real company project has a readme
 
-### 4. api documentation
-explains all backend routes — url, method and data
-advantages:
-- frontend and backend can work separately
-- easy to test each route using postman
-- no confusion about what data to send or expect back
-- all real apps like swiggy and github have api docs
-
-## api routes
+### 4. api routes
 - GET    /api/todos — returns all todos
 - POST   /api/todos — adds a new todo
 - PUT    /api/todos — updates an existing todo
 - DELETE /api/todos — deletes a todo
+
 
 ## how to run locally
 1. clone the repo
@@ -79,7 +72,9 @@ advantages:
 ## project structure
 - app/page.tsx        — frontend ui code
 - app/api/todos/route.ts — backend api routes
-
+- services/todoService.ts - API calling functions
+- types/todo.ts - Type definition
+ 
 ## note
 data is stored temporarily in memory.
 it clears when the server restarts.
