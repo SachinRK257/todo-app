@@ -1,66 +1,30 @@
-// this is the main API path where all todo requests go
-const BASE_URL = "/api/todos";
+const BASE_URL = "/api/todos";   // Store backend API path in a variable
 
-
-// this function gets all todos from backend
-export const getTodos = async () => {
-  // calling backend API
-  const res = await fetch(BASE_URL);
-
-  // if something goes wrong, show error
-  if (!res.ok) throw new Error("failed to fetch todos");
-
-  // convert response into json and return it
-  return res.json();
+export const getTodos = async () => {  //I created an async function to fetch all todos from backend using API
+  const res = await fetch(BASE_URL);   // call backend API to get todos
+  return res.json();  // convert response to JSON and return data
 };
 
-
-// this function adds a new todo
-export const addTodo = async (text: string) => {
-  // sending data to backend
-  const res = await fetch(BASE_URL, {
-    method: "POST", // post means adding new data
-
-    headers: {
-      "Content-Type": "application/json", // telling backend we send json
-    },
-
-    body: JSON.stringify({ text }), // sending the todo text
-  });
-
-  // if adding fails, show error
-  if (!res.ok) throw new Error("failed to add todo");
-
-  // return the newly added todo
-  return res.json();
-};
-
-
-// this function deletes a todo using id
-export const deleteTodo = async (id: number) => {
-  // sending delete request to backend
-  await fetch(BASE_URL, {
-    method: "DELETE", // delete means removing data
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({ id }), // sending which todo to delete
+export const addTodo = async (text: string) => {    // function to add new todo
+  await fetch(BASE_URL, {    // send POST request to backend
+    method: "POST",      // add new data
+    headers: { "Content-Type": "application/json" },  // sending JSON
+    body: JSON.stringify({ text }),   // convert text into JSON and send
   });
 };
 
+export const deleteTodo = async (text: string) => {     // function to delete a todo
+  await fetch(BASE_URL, {      // send DELETE request to backend
+    method: "DELETE",    //remove data
+    headers: { "Content-Type": "application/json" },  //sending JSON
+    body: JSON.stringify({ text }),    // send which task to delete
+  });
+};
 
-// this function updates a todo
-export const updateTodo = async (id: number, text: string) => {
-  // sending updated data to backend
-  await fetch(BASE_URL, {
-    method: "PUT", // put means updating existing data
-
-    headers: {
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify({ id, text }), // sending id + new text
+export const updateTodo = async (oldText: string, newText: string) => {
+  await fetch(BASE_URL, {     // send PUT request to backend
+    method: "PUT",    // update data
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ oldText, newText }),       // send old value and new value to update  
   });
 };

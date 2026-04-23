@@ -1,48 +1,45 @@
-import db from "@/lib/db"; // importing database connection we created in lib/db.ts
+import db from "@/lib/db";
 
-// GET — fetch all todos from database
+export const dynamic = "force-dynamic";    // always fetch fresh data, disable caching
+
+// GET all todos from database
 export async function GET() {
-  const [rows] = await db.query("SELECT * FROM todos"); // get all rows from todos table
-  return Response.json(rows); // send all todos to frontend
+  const [rows] = await db.query("SELECT * FROM todos");   // run SQL query to get all tasks
+  return Response.json(rows);    // send tasks to frontend in JSON format
 }
 
-// POST — add new todo to database
+// POST API to add new todo
 export async function POST(req: Request) {
-  const body = await req.json(); // read the todo text sent from frontend
+  const body = await req.json();   // get data sent from frontend
 
   await db.query(
-    "INSERT INTO todos (text) VALUES (?)", // add new row to todos table
-    [body.text] // the todo text from frontend
+    "INSERT INTO todos (text) VALUES (?)",
+    [body.text]    // insert new task into database
   );
 
-  // get the newly added todo to send back
-  const [rows] = await db.query(
-    "SELECT * FROM todos ORDER BY id DESC LIMIT 1" // get last inserted row
-  );
-
-  return Response.json(rows); // send new todo back to frontend
+  return Response.json({ message: "Added" });   // send success response
 }
 
-// PUT — update existing todo in database
+// PUT API to update todo
 export async function PUT(req: Request) {
-  const body = await req.json(); // read id + new text from frontend
+  const body = await req.json();    // get old and new text from frontend
 
   await db.query(
-    "UPDATE todos SET text = ? WHERE id = ?", // find the row by id and update its text
-    [body.text, body.id] // new text and which id to update
-  );
+    "UPDATE todos SET text = ? WHERE text = ?",
+    [body.newText, body.oldText]
+  );    // update task in database
 
-  return Response.json({ message: "Updated" }); // confirm success to frontend
-}
+  return Response.json({ message: "Updated" });     // send success response
+}  
 
-// DELETE — remove todo from database
+// DELETE API to remove todo
 export async function DELETE(req: Request) {
-  const body = await req.json(); // read which id to delete from frontend
+  const body = await req.json();   // get text from frontend
 
   await db.query(
-    "DELETE FROM todos WHERE id = ?", // find the row by id and delete it
-    [body.id] // the id to delete
-  );
+    "DELETE FROM todos WHERE text = ?",
+    [body.text]     
+  );    // delete task from database
 
-  return Response.json({ message: "Deleted" }); // confirm success to frontend
+  return Response.json({ message: "Deleted" });   // send success response
 }

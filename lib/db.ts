@@ -1,12 +1,10 @@
-// this file connects our app to mysql database
-import mysql from "mysql2/promise";
+import mysql from "mysql2/promise";  // import MySQL library with promise support
 
-// creating a connection pool — reuses connections for better performance
-const db = mysql.createPool({
-  host: process.env.DB_HOST,         // database server location
-  user: process.env.DB_USER,         // database username
-  password: process.env.DB_PASSWORD, // database password
-  database: process.env.DB_NAME,     // database name
+const db = mysql.createPool({    // create database connection pool
+  host: "localhost",     // database location
+  user: "root",          // username
+  password: "mother",    // password
+  database: "tododb",    // database name
 });
 
-export default db;
+export default db;   // export connection to use in backend
